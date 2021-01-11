@@ -3,21 +3,22 @@ import java.io.*;
 
 public class StringManipulation {
 	public static void main(String[] args) {
+		
 		int n;
 		char in1;
 		String userFile, tempS;
 		
 		Scanner sc=new Scanner(System.in);
 		
+		//Letting the user decide their preferred method of input.
 		System.out.print("Would you like to input from a (f)ile or the (c)onsole? (f or c): ");
 		in1 = sc.next().charAt(0);
 		System.out.println();
 		
+		//Data validation for the user input.
 		if(in1 != 'f' && in1 != 'F' && in1 != 'c' && in1 != 'C') {
-			
 			while(in1 != 'f' || in1 != 'F' || in1 != 'c' || in1 != 'C') {
-				
-				
+								
 				System.out.print("That is not a valid input please input f for file or c for console: ");
 				in1 = sc.next().charAt(0);
 				System.out.println();
@@ -25,32 +26,36 @@ public class StringManipulation {
 			}
 		}
 		
+		//Section of code if the user chooses file.
 		if(in1 == 'f' || in1 == 'F') {
+			
+			//User inputs a file name.
 			System.out.println("Please input the name of the file you wish to use:");
 			sc.nextLine();
 			userFile = sc.nextLine();
-			
-					
-			
+						
 		    try {
 		    	File fileName = new File(userFile);
 		        Scanner fileReader = new Scanner(fileName);
 		        while (fileReader.hasNextLine()) {
+		        	
+		        	//Uses the first line in the file to determine the number of strings to read in.
 		        	n = fileReader.nextInt();
 		        	String[] strings = new String[n];
 		        	fileReader.nextLine();
 		        	
+		        	//Filling the strings array from the file.
 		        	for(int i = 0; i < n; i++) {
 		        		strings[i] = fileReader.nextLine();
 		        	}
 		        	
+		        	//Printing the strings that were in the file.
 		        	System.out.println("The strings that were in the file:");
-		        	
 		        	for(int i = 0; i < n; i++) {
 		        		System.out.println((i+1) + ". " + strings[i]);
 		        	}
 		        	
-		        	
+		        	//Comparing the strings for anagrams.
 		        	for(int i = 0; i < n; i++) {
 		        		tempS = "";
 		        		for(int j = 0; j < n; j++) {
@@ -67,6 +72,7 @@ public class StringManipulation {
 		        		}
 		        	}
 		        	
+		        	//Checking the strings for Palindromes.
 		        	for(int i = 0; i < n; i++) {
 		        		if(isPalindrome(strings[i]) != true) {	
 		        			System.out.println("String " + (i+1) + " is not a palindrome.");
